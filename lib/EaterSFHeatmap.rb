@@ -1,5 +1,2 @@
-require "version"
-
-module EaterSFHeatmap
-  # Your code goes here...
-end
+require_relative "./version"
+require_relative './cli'
