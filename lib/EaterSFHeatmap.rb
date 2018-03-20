@@ -1,4 +1,4 @@
-require "EaterSFHeatmap/version"
+require "version"
 
 module EaterSFHeatmap
   # Your code goes here...

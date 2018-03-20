@@ -1,3 +1,4 @@
 #!/usr/bin/env ruby
+require './lib'
 
-puts "Hello, World!"
+EaterSFHeatmap::CLI.new.welcome
