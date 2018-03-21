@@ -11,6 +11,7 @@ class EaterSFHeatmap::Restaurant
 		
 		restaurants= []
 
+		restaurants << self.scrape_heatmap
 		# 1. Go to https://sf.eater.com/maps/best-new-restaurants-san-francisco-oakland-berkeley-heatmap
 
 		# 2. Extract the properties
@@ -27,6 +28,17 @@ class EaterSFHeatmap::Restaurant
 		# 3. instantiate a Restaurant object
 
 		restaurants
+	end
+
+	def self.scrape_heatmap
+		doc = Nokogiri::HTML(open("https://sf.eater.com/maps/best-new-restaurants-san-francisco-oakland-berkeley-heatmap"))
+		
+		rest_name = 
+		rest_address = 
+		rest_phone = 
+		rest_blurb = 
+
+
 	end
 
 end
