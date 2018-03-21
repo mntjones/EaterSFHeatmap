@@ -1,8 +1,13 @@
 # EaterSFHeatmap
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/EaterSFHeatmap`. To experiment with that code, run `bin/console` for an interactive prompt.
 
-TODO: Delete this and the text above, and describe your gem
+This Ruby Gem will scrape Eater SF's Heatmap page and display the current restaurants on the heat map and their address.
+
+Ex. 1. My Eatery - 1234 Main St., San Francisco, CA 94101
+
+The user will then be prompted to choose a number of the restaurant they want more information about.
+
+Ex. "My Eatery produces Spanish-inspired cuisine, locally sourced, with a menu that changes weekly."
 
 ## Installation
 
@@ -32,7 +37,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/EaterSFHeatmap. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/mntjones/EaterSFHeatmap. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 ## License
 
@@ -40,4 +45,4 @@ The gem is available as open source under the terms of the [MIT License](https:/
 
 ## Code of Conduct
 
-Everyone interacting in the EaterSFHeatmap project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/EaterSFHeatmap/blob/master/CODE_OF_CONDUCT.md).
+Everyone interacting in the EaterSFHeatmap project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/mntjones/EaterSFHeatmap/blob/master/CODE_OF_CONDUCT.md).
