@@ -36,4 +36,21 @@ What is a restaurant?
 - has a description
 - has various optional links: website, opentable, foursquare, google maps
 
+#Scraping
 
+1. Go to https://sf.eater.com/maps/best-new-restaurants-san-francisco-oakland-berkeley-heatmap
+
+2. Extract the properties
+	a. name
+	b. address
+	c. phone number
+	d. blurb
+	e. link addresses
+		i. website
+		ii. opentable
+		iii. foursquare
+		iv. maps
+
+3. instantiate a Restaurant object
+
+4.
