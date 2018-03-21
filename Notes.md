@@ -28,4 +28,12 @@ http://guides.rubygems.org/make-your-own-gem/
 CLI gem:
 http://robdodson.me/how-to-write-a-command-line-ruby-gem/
 
-#3
+What is a restaurant?
+
+- has a name
+- has an address
+- has a phone number
+- has a description
+- has various optional links: website, opentable, foursquare, google maps
+
+
