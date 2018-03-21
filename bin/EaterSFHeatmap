@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 
-require './lib/EaterSFHeatmap'
+require "bundler/setup"
+require "EaterSFHeatmap"
 
 EaterSFHeatmap::CLI.new.welcome

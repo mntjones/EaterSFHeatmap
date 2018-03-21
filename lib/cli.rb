@@ -8,13 +8,13 @@ class EaterSFHeatmap::CLI
 	end
 
 	def list_restaurants
-		puts <<-DOC.gsub /^\s*/, ""
-			1. Alta
-			2. August 1 Five
-		DOC
+		
+		#class called restaurant, with method called list
+		@restaurants = EaterSFHeatmap::Restaurant.list_item
 	end
 
 	def blurb
+		puts "Enter the number of the restaurant you'd like to learn more about OR type 'list' to relist the restaurants OR type exit: "
 
 		#need to implement logic to make sure a valid input is used.
 		input = gets.strip.downcase
