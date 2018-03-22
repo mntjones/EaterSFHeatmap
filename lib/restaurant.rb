@@ -50,19 +50,39 @@ class EaterSFHeatmap::Restaurant
 		# 3. instantiate a Restaurant object
 
 		doc = Nokogiri::HTML(open("https://sf.eater.com/maps/best-new-restaurants-san-francisco-oakland-berkeley-heatmap"))
+		list = doc.css(".c-mapstack__cards")
+		
+		# b. and c. - Has all addresses AND phone numbers - each line item has one address and one phone number.
+	    address = list.css(".c-mapstack__address").text
+	    addresses = address.split("\n")
 
-        cards = doc.css(".c-mapstack__cards")
-        list = cards.css("h2").text
-		# "Where to eat right now\n1 Funky Elephant\n2 Cdp\n3 dosa By DOSA\n4Eight Tables by George Chen\n
-        #5 The SnugSHN Orpheum Theatre\n6 International Smoke\n7 IPPUDO San Francisco\n8 Villon\n9 Nyum Bai\n
-        #10 Kaya Restaurant\n11 Barvale\n12 True Laurel\n13 Son’s AdditionRelated Maps"
-		# need to split on \n, add each entry into an array
-        
+	    adds = []
+	    phones = []
+	    hold = []
 
-        restaurant_list = list.split("\n")
+	    addresses.each.with_index do |line, i|
+	      hold = line.split(/(?=\()/)
+	      adds << hold[0]
+	      phones << hold[1]
+	    end 
+
+
+
+
+		holding = []
+
+		cards = list.css("h2")
+		cards.each do |sect|
+		# cards = list.css("h2 .c-mapstack__card-index").text gives you array of numbers, which corresponds to the list number	
+		  if sect.css("h2 .c-mapstack__card-index").text != nil
+		    holding << sect
+		  end
+		end
+		
+		# holding[1].css(".c-mpstack__card-index").text = "1"
+		# holding[1].children[2].text = "Funky Elephant"
+		
          binding.pry
-
-		 holding = []
 
 
 	    # See above method for this issue
@@ -86,19 +106,7 @@ class EaterSFHeatmap::Restaurant
 	    #Ahhhhh, need to get rid of promotional blurbs! - do have each item as a blurb!
 
 
-	    # Has all addresses AND phone numbers - each line item has one address and one phone number.
-	    address = list.css(".c-mapstack__address").text
-	    addresses = address.split("\n")
-
-	    adds = []
-	    phones = []
-	    hold = []
-
-	    addresses.each.with_index do |line, i|
-	      hold = line.split(/(?=\()/)
-	      adds << hold[0]
-	      phones << hold[1]
-	    end    
+	       
 	end
 end
 
