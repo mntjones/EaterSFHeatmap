@@ -30,6 +30,8 @@ class EaterSFHeatmap::CLI
 
 			if input.to_i > 0
 				puts "Restaurants coming soon..."
+
+				Restaurant.scrape_heatmap
 				# eat = @restaurants[input.to_i - 1]
 				# puts "#{input.to_i}. #{restaurant.name} - #{restaurant.address} - #{restaurant.phone}"
 			elsif input == "list"

@@ -48,7 +48,7 @@ class Restaurant
 	def self.scrape_heatmap
 		doc = Nokogiri::HTML(open("https://sf.eater.com/maps/best-new-restaurants-san-francisco-oakland-berkeley-heatmap"))
 		
-		list = doc.css(".c-mapstack__cards")
+		list = doc.css(".c-mapstack__cards") #collection of .c-mapstack__card
 
 	    #address[0].children.text = "address"
 	    #address[1].children.text = "phone \n"
@@ -68,7 +68,7 @@ class Restaurant
 		    if info.text != nil
 		      adds << info.text
 		    end
-		  end
+		end
 		
 		# all info separated, but how to match address to ph number when one doesn't have a phone?
 	
@@ -97,19 +97,42 @@ class Restaurant
     
     
 	    # For info blurbs
-	    blurb = list.css(".c-entry-content")
+	    # blurb = list.css(".c-entry-content")
 	    hold_blurb = []
-	    blurb.each do |sect|
-		  if sect.children != nil
-		    hold_blurb << sect.children.text
-		  end
+	    blurbs = []
+	    blurb = list.css(".c-mapstack__card")
+	 #    blurb.each do |sect|
+		#   if sect.children != nil
+		#     hold_blurb << sect.children.text
+		#   end
+		# end
+		
+		blurb.each do |card|
+			#empty array, if not present
+			if (!card.css(".c-mapstack__sponsor").empty?) || (!card.css(".c-entry-sponsorship").empty?)
+				hold_blurb << "SPONSOR"
+			else
+				hold_blurb << card.css(".c-entry-content").children.text
+			end
 		end
+
+
+		hold_blurb.reject! { |c| c == ""}
+		hold_blurb.delete("SPONSOR")
+
+
+
+		binding.pry
+
+
+
+
 
 	    # blurb[1].children.text - first blurb
 	    
 	    #Ahhhhh, need to get rid of promotional blurbs! - do have each item as a blurb!
 	    
-	    binding.pry
+	    #binding.pry
 	end
 end
 
