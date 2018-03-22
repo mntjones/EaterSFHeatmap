@@ -6,6 +6,12 @@ class Restaurant
 
 	attr_accessor :name, :address, :phone, :blurb
 
+
+	def initialize
+		@restaurants = []
+	end
+
+
 	def self.list_item 
 		self.scrape
 		
@@ -19,10 +25,8 @@ class Restaurant
 
 	def self.scrape
 		#scrape Eater SF and return restaurants based on that data
-		
-		restaurants= []
 
-		restaurants << self.scrape_heatmap
+		@restaurants << self.scrape_heatmap
 		# 1. Go to https://sf.eater.com/maps/best-new-restaurants-san-francisco-oakland-berkeley-heatmap
 
 		# 2. Extract the properties
@@ -38,7 +42,7 @@ class Restaurant
 
 		# 3. instantiate a Restaurant object
 
-		restaurants
+		@restaurants
 	end
 
 	def self.scrape_heatmap
@@ -46,32 +50,32 @@ class Restaurant
 		
 		list = doc.css(".c-mapstack__cards")
 
-    #address[0].children.text = "address"
-    #address[1].children.text = "phone \n"
-    
-    address = list.css(".c-mapstack__address")
-    adds = []
-    phones = []
-    hold_add = []
+	    #address[0].children.text = "address"
+	    #address[1].children.text = "phone \n"
+	    
+	    address = list.css(".c-mapstack__address")
+	    adds = []
+	    phones = []
+	    hold_add = []
 
-    address.each do |add|
-      if add.children.text != nil
-        hold_add << add
-      end
-    end
-	
-	  hold_add.each.with_index do |info, i|
-	    if info.text != nil
-	      adds << info.text
+	    address.each do |add|
+	      if add.children.text != nil
+	        hold_add << add
+	      end
 	    end
-	  end
+	
+	  	hold_add.each.with_index do |info, i|
+		    if info.text != nil
+		      adds << info.text
+		    end
+		  end
 		
-	# all info separated, but how to match address to ph number when one doesn't have a phone?
+		# all info separated, but how to match address to ph number when one doesn't have a phone?
 	
 	
 		
-  # For restaurant names
-    hold_name = []
+  		# For restaurant names
+	    hold_name = []
 		cards = list.css("h2")
 		cards.each do |sect|
 		  if sect.css("h2 .c-mapstack__card-index").text != nil
@@ -92,22 +96,21 @@ class Restaurant
     
     
     
-    # For info blurbs
-    blurb = list.css(".c-entry-content")
-    hold_blurb = []
-    blurb.each do |sect|
+	    # For info blurbs
+	    blurb = list.css(".c-entry-content")
+	    hold_blurb = []
+	    blurb.each do |sect|
 		  if sect.children != nil
 		    hold_blurb << sect.children.text
 		  end
 		end
 
-    # blurb[1].children.text - first blurb
-    
-    #Ahhhhh, need to get rid of promotional blurbs! - do have each item as a blurb!
-    
-    binding.pry
+	    # blurb[1].children.text - first blurb
+	    
+	    #Ahhhhh, need to get rid of promotional blurbs! - do have each item as a blurb!
+	    
+	    binding.pry
 	end
-	
 end
 
-Restaurant.scrape_heatmap
+#Restaurant.scrape_heatmap

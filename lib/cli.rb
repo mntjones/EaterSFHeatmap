@@ -1,5 +1,3 @@
-require_relative './lib/restaurant.rb'
-
 class EaterSFHeatmap::CLI
 
 	def welcome
@@ -12,10 +10,10 @@ class EaterSFHeatmap::CLI
 	def list_restaurants
 		puts "Here are the current restaurants on Eater SF's Heatmap: "
 		#class called restaurant, with method called list
-		@restaurants = EaterSFHeatmap::Restaurant.list_item
-		@restaurants.each.with_index(1) do |restaurant, i|
-			puts "#{i}. #{restaurant.name} - #{restaurant.address} - #{restaurant.phone}"
-		end
+		# @restaurants = EaterSFHeatmap::Restaurant.list_item
+		# @restaurants.each.with_index(1) do |restaurant, i|
+		# 	puts "#{i}. #{restaurant.name} - #{restaurant.address} - #{restaurant.phone}"
+		# end
 
 
 	end
@@ -31,8 +29,9 @@ class EaterSFHeatmap::CLI
 			input = gets.strip.downcase
 
 			if input.to_i > 0
-				eat = @restaurants[input.to_i - 1]
-				puts "#{input.to_i}. #{restaurant.name} - #{restaurant.address} - #{restaurant.phone}"
+				puts "Restaurants coming soon..."
+				# eat = @restaurants[input.to_i - 1]
+				# puts "#{input.to_i}. #{restaurant.name} - #{restaurant.address} - #{restaurant.phone}"
 			elsif input == "list"
 				list_restaurants
 			else
