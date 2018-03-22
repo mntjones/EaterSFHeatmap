@@ -50,8 +50,9 @@ class Restaurant
 		
 		list = doc.css(".c-mapstack__cards") #collection of .c-mapstack__card
 
-	    #address[0].children.text = "address"
-	    #address[1].children.text = "phone \n"
+
+	    # For addresses - b. Array in "adds", For phone #s - c. Array in "phones"
+	    # This section is prime for refactoring -ugh
 
 	    adds = []
 	    phones = []
@@ -71,6 +72,7 @@ class Restaurant
 		addresses = []
 		hold_add.reject! { |c| c == ""}
 		hold_add.delete("SPONSOR")
+
 		hold_add.each do |entry|
 			addresses << entry.strip
 		end
@@ -91,11 +93,11 @@ class Restaurant
 			end
 		end
 
-		binding.pry
-		
-		# all info separated, but how to match address to ph number when one doesn't have a phone?
-	
-	
+		holding.each do |addph|
+			adds << addph[0]
+			phones << addph[1]
+		end
+
 		
   		# For restaurant names - a. Array of names in "names"
 	    hold_name = []
@@ -112,10 +114,8 @@ class Restaurant
 		  if name.children[2] != nil
 		    names << name.children[2].text
 		  end
-		end
-		
-		# the array "names" holds the restaurant names
-    
+		end    
+
 	    # For info blurbs - d. Array of blurbs in "blurbs"
 	
 	    hold_blurb = []
