@@ -1,3 +1,5 @@
+require_relative './lib/restaurant.rb'
+
 class EaterSFHeatmap::CLI
 
 	def welcome
