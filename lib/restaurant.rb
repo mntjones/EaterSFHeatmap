@@ -52,23 +52,46 @@ class Restaurant
 
 	    #address[0].children.text = "address"
 	    #address[1].children.text = "phone \n"
-	    
-	    address = list.css(".c-mapstack__address")
+
 	    adds = []
 	    phones = []
 	    hold_add = []
 
-	    address.each do |add|
-	      if add.children.text != nil
-	        hold_add << add
-	      end
-	    end
-	
-	  	hold_add.each.with_index do |info, i|
-		    if info.text != nil
-		      adds << info.text
-		    end
+		address = list.css(".c-mapstack__card")
+
+		address.each do |card|
+			if (!card.css(".c-mapstack__sponsor").empty?) || (!card.css(".c-entry-sponsorship").empty?)
+				hold_add << "SPONSOR"
+
+			else card.css(".c-mapstack__address").children.text != nil
+				hold_add << card.css(".c-mapstack__address").children.text
+			end
 		end
+
+		addresses = []
+		hold_add.reject! { |c| c == ""}
+		hold_add.delete("SPONSOR")
+		hold_add.each do |entry|
+			addresses << entry.strip
+		end
+			
+		holding = []	
+		addresses.each do |line|
+			holding << line.split(/([(])\s*/)
+		end
+
+		holding.collect do |arr|
+			if arr.length == 3
+				arr[2].prepend("(")
+				arr.delete("(")
+			end
+
+			if arr.length == 1
+				arr[1] = "No phone number provided"
+			end
+		end
+
+		binding.pry
 		
 		# all info separated, but how to match address to ph number when one doesn't have a phone?
 	
