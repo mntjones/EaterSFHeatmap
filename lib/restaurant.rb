@@ -74,7 +74,7 @@ class Restaurant
 	
 	
 		
-  		# For restaurant names
+  		# For restaurant names - a. Array of names in "names"
 	    hold_name = []
 		cards = list.css("h2")
 		cards.each do |sect|
@@ -92,47 +92,26 @@ class Restaurant
 		end
 		
 		# the array "names" holds the restaurant names
-
     
-    
-    
-	    # For info blurbs
-	    # blurb = list.css(".c-entry-content")
+	    # For info blurbs - d. Array of blurbs in "blurbs"
+	
 	    hold_blurb = []
 	    blurbs = []
 	    blurb = list.css(".c-mapstack__card")
-	 #    blurb.each do |sect|
-		#   if sect.children != nil
-		#     hold_blurb << sect.children.text
-		#   end
-		# end
-		
+
 		blurb.each do |card|
 			#empty array, if not present
 			if (!card.css(".c-mapstack__sponsor").empty?) || (!card.css(".c-entry-sponsorship").empty?)
-				hold_blurb << "SPONSOR"
+				blurbs << "SPONSOR"
 			else
-				hold_blurb << card.css(".c-entry-content").children.text
+				blurbs << card.css(".c-entry-content").children.text
 			end
 		end
 
 
-		hold_blurb.reject! { |c| c == ""}
-		hold_blurb.delete("SPONSOR")
+		blurbs.reject! { |c| c == ""}
+		blurbs.delete("SPONSOR")
 
-
-
-		binding.pry
-
-
-
-
-
-	    # blurb[1].children.text - first blurb
-	    
-	    #Ahhhhh, need to get rid of promotional blurbs! - do have each item as a blurb!
-	    
-	    #binding.pry
 	end
 end
 
