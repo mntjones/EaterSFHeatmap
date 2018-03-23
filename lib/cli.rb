@@ -17,19 +17,22 @@ class EaterSFHeatmap::CLI
 
 	def blurb
 		#puts "Enter the number of the restaurant you'd like to learn more about OR type 'list' to relist the restaurants OR type exit: "
-		info = []
+		info = Restaurant.scrape_blurb
 		#need to implement logic to make sure a valid input is used.
 		input = nil
 		while input != "exit"
 
 			puts "Enter the number of the restaurant you'd like to learn more about OR type 'list' to relist the restaurants OR type exit: "
 			input = gets.strip.downcase
-
+		
 			if input.to_i > 0
-				info = Restaurant.scrape_blurb
-				puts "#{info[input.to_i + 1]}"
+				puts " "
+				puts info[input.to_i - 1]
+				puts " "
 			elsif input == "list"
 				list_restaurants
+			elsif input == "exit"
+				
 			else
 				puts "Please enter a valid selection."
 			end

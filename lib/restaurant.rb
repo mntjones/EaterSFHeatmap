@@ -181,8 +181,12 @@ class Restaurant
 			end
 		end
 
+		bl = []
 		blurbs.reject! { |c| c == ""}
 		blurbs.delete("SPONSOR")
-		blurbs
+		blurbs.collect do |item|
+			bl << item.strip
+		end
+		bl
 	end
 end
