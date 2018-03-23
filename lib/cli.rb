@@ -2,6 +2,8 @@ class EaterSFHeatmap::CLI
 
 	def welcome
 		puts "Welcome to the Eater SF Heatmap Gem!"
+		Restaurant.scrape
+		binding.pry
 		list_restaurants
 		blurb
 		goodbye
@@ -25,7 +27,7 @@ class EaterSFHeatmap::CLI
 			puts "Enter the number of the restaurant you'd like to learn more about OR type 'list' to relist the restaurants OR type exit: "
 			input = gets.strip.downcase
 		
-			if input.to_i > 0
+			if input.to_i > 0 && input.to_i <= info.length
 				puts " "
 				puts info[input.to_i - 1]
 				puts " "
@@ -37,11 +39,6 @@ class EaterSFHeatmap::CLI
 				puts "Please enter a valid selection."
 			end
 		end
-	end
-
-	def links
-		#method to deliver links (website/opentable/foursquare/maps)
-
 	end
 
 	def goodbye

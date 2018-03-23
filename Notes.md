@@ -16,8 +16,7 @@ a. Get the current listings of the SF Eater Heatmap by number on heatmap, name o
     etc.
 b. Ask if you want restaurant info?
     -> Get blurb written about restaurant
-c. Ask if want to link to Opentable to make reservation, or go to restaurant website for more info.
-    "Do you want to: 1. Make a reservation using Opentable, or 2. Go to the restaurant's website? Enter exit to quit."
+
 
 
 #2
@@ -45,12 +44,6 @@ What is a restaurant?
 	b. address
 	c. phone number
 	d. blurb
-	e. link addresses
-		i. website
-		ii. opentable
-		iii. foursquare
-		iv. maps
 
 3. instantiate a Restaurant object
 
-4.

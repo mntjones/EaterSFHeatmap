@@ -6,33 +6,24 @@ class Restaurant
 
 	attr_accessor :name, :address, :phone, :blurb
 
-
-	def initialize
-		@restaurants = []
-	end
-
-
-	def self.list_item 
-		self.scrape
-		
-		
-	end
+	@@restaurants = []
 
 	def self.scrape
 		#scrape Eater SF and return restaurants based on that data
 
-		@restaurants << self.scrape_heatmap
-		# 1. Go to https://sf.eater.com/maps/best-new-restaurants-san-francisco-oakland-berkeley-heatmap
+		names = self.scrape_names
+		addresses = self.scrape_addresses
+		phones = self.scrape_phones
+		blurbs = self.scrape_blurb
 
-		# 2. Extract the properties
-		# 	a. name
-		# 	b. address
-		# 	c. phone number
-		# 	d. blurb
+		names.each_with_index do |name, i|
+     		hold = {:name => names[i], :address => addresses[i], :phones => phones[i], :blurb => blurbs[i]}
+     		@@restaurants << hold
+   		end
+   		@@restaurants
+
 	
 		# 3. instantiate a Restaurant object
-
-		@restaurants
 	end
 
 	def self.scrape_addresses
@@ -189,4 +180,9 @@ class Restaurant
 		end
 		bl
 	end
+
+	def self.restaurants
+		@@restaurants
+	end
+
 end
