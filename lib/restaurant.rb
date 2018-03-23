@@ -15,12 +15,7 @@ class Restaurant
 	def self.list_item 
 		self.scrape
 		
-		# doc = Nokogiri::HTML(open("https://sf.eater.com/maps/best-new-restaurants-san-francisco-oakland-berkeley-heatmap"))
 		
-		# list = doc.css(".c-mapstack__cards")
-		# list.css("h2").text
-		# "Where to eat right now\n1 Funky Elephant\n2 Cdp\n3 dosa By DOSA\n4Eight Tables by George Chen\n5 The SnugSHN Orpheum Theatre\n6 International Smoke\n7 IPPUDO San Francisco\n8 Villon\n9 Nyum Bai\n10 Kaya Restaurant\n11 Barvale\n12 True Laurel\n13 Son’s AdditionRelated Maps"
-		# need to split on \n, add each entry into an array
 	end
 
 	def self.scrape
@@ -34,28 +29,22 @@ class Restaurant
 		# 	b. address
 		# 	c. phone number
 		# 	d. blurb
-		# 	e. link addresses
-		# 		i. website
-		# 		ii. opentable
-		# 		iii. foursquare
-		# 		iv. maps
-
+	
 		# 3. instantiate a Restaurant object
 
 		@restaurants
 	end
 
-	def self.scrape_heatmap
+	def self.scrape_addresses
 		doc = Nokogiri::HTML(open("https://sf.eater.com/maps/best-new-restaurants-san-francisco-oakland-berkeley-heatmap"))
 		
 		list = doc.css(".c-mapstack__cards") #collection of .c-mapstack__card
 
 
-	    # For addresses - b. Array in "adds", For phone #s - c. Array in "phones"
+	    # For addresses - b. Array in "adds"
 	    # This section is prime for refactoring -ugh
 
 	    adds = []
-	    phones = []
 	    hold_add = []
 
 		address = list.css(".c-mapstack__card")
@@ -95,10 +84,65 @@ class Restaurant
 
 		holding.each do |addph|
 			adds << addph[0]
-			phones << addph[1]
+		end
+		adds
+	end
+
+	def self.scrape_phones
+		doc = Nokogiri::HTML(open("https://sf.eater.com/maps/best-new-restaurants-san-francisco-oakland-berkeley-heatmap"))
+		list = doc.css(".c-mapstack__cards") #collection of .c-mapstack__card
+
+
+	    # For phone #s - c. Array in "phones"
+	    # This section is prime for refactoring -ugh
+
+	    phones = []
+	    hold_ph = []
+
+		address = list.css(".c-mapstack__card")
+
+		address.each do |card|
+			if (!card.css(".c-mapstack__sponsor").empty?) || (!card.css(".c-entry-sponsorship").empty?)
+				hold_ph << "SPONSOR"
+
+			else card.css(".c-mapstack__address").children.text != nil
+				hold_ph << card.css(".c-mapstack__address").children.text
+			end
 		end
 
+		phone = []
+		hold_ph.reject! { |c| c == ""}
+		hold_ph.delete("SPONSOR")
+
+		hold_ph.each do |entry|
+			phone << entry.strip
+		end
+			
+		holding = []	
+		phone.each do |line|
+			holding << line.split(/([(])\s*/)
+		end
+
+		holding.collect do |arr|
+			if arr.length == 3
+				arr[2].prepend("(")
+				arr.delete("(")
+			end
+
+			if arr.length == 1
+				arr[1] = "No phone number provided"
+			end
+		end
+
+		holding.each do |addph|
+			phones << addph[1]
+		end
+		phones
+	end
 		
+	def self.scrape_names
+		doc = Nokogiri::HTML(open("https://sf.eater.com/maps/best-new-restaurants-san-francisco-oakland-berkeley-heatmap"))
+		list = doc.css(".c-mapstack__cards") #collection of .c-mapstack__card
   		# For restaurant names - a. Array of names in "names"
 	    hold_name = []
 		cards = list.css("h2")
@@ -114,8 +158,14 @@ class Restaurant
 		  if name.children[2] != nil
 		    names << name.children[2].text
 		  end
-		end    
+		end  
+		names  
+	end
 
+	def self.scrape_blurb
+		doc = Nokogiri::HTML(open("https://sf.eater.com/maps/best-new-restaurants-san-francisco-oakland-berkeley-heatmap"))
+		
+		list = doc.css(".c-mapstack__cards") #collection of .c-mapstack__card
 	    # For info blurbs - d. Array of blurbs in "blurbs"
 	
 	    hold_blurb = []
@@ -131,11 +181,8 @@ class Restaurant
 			end
 		end
 
-
 		blurbs.reject! { |c| c == ""}
 		blurbs.delete("SPONSOR")
-
+		blurbs
 	end
 end
-
-#Restaurant.scrape_heatmap

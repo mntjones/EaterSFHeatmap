@@ -9,18 +9,15 @@ class EaterSFHeatmap::CLI
 
 	def list_restaurants
 		puts "Here are the current restaurants on Eater SF's Heatmap: "
-		#class called restaurant, with method called list
-		# @restaurants = EaterSFHeatmap::Restaurant.list_item
-		# @restaurants.each.with_index(1) do |restaurant, i|
-		# 	puts "#{i}. #{restaurant.name} - #{restaurant.address} - #{restaurant.phone}"
-		# end
-
-
+		list = Restaurant.scrape_names
+		list.each.with_index do |rest, i|
+			puts "#{i + 1}.   #{rest}"
+		end
 	end
 
 	def blurb
 		#puts "Enter the number of the restaurant you'd like to learn more about OR type 'list' to relist the restaurants OR type exit: "
-
+		info = []
 		#need to implement logic to make sure a valid input is used.
 		input = nil
 		while input != "exit"
@@ -29,11 +26,8 @@ class EaterSFHeatmap::CLI
 			input = gets.strip.downcase
 
 			if input.to_i > 0
-				puts "Restaurants coming soon..."
-
-				Restaurant.scrape_heatmap
-				# eat = @restaurants[input.to_i - 1]
-				# puts "#{input.to_i}. #{restaurant.name} - #{restaurant.address} - #{restaurant.phone}"
+				info = Restaurant.scrape_blurb
+				puts "#{info[input.to_i + 1]}"
 			elsif input == "list"
 				list_restaurants
 			else
