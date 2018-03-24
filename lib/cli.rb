@@ -2,6 +2,7 @@ class EaterSFHeatmap::CLI
 
 	attr_accessor :name, :address, :phone, :blurb
 
+
 	def welcome
 		puts "Welcome to the Eater SF Heatmap Gem!"
 		#initializes Restaurant objects
@@ -12,6 +13,7 @@ class EaterSFHeatmap::CLI
 	end
 
 	def list_restaurants
+
 		puts "Here are the current restaurants on Eater SF's Heatmap: "
 		list = Restaurant.restaurants
 		list.each.with_index do |rest, i|

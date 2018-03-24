@@ -52,3 +52,7 @@ What is a restaurant?
 
 3. instantiate a Restaurant object
 
+#Potential Future updates
+ 1. add the Essential 38 restaurants as an option
+ 2. add yelp review - would require finding in yelp...
+ 3. add website urls
