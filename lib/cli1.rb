@@ -7,21 +7,21 @@ class EaterSFHeatmap::CLI1
 		puts "Welcome to the Eater SF Gem!"
 		#initializes Restaurant objects
 
-		list = list_restaurants
-		blurb(list)
+		list_restaurants
+		
 		goodbye
 	end
 
 	def list_restaurants
 		input= nil
-		#list = []
+		list = []
 
 		while input != 'exit'
 			puts"Do you want to see: 1. the Heatmap List or 2. the 38 Essentials List?"
 			input = gets.strip.downcase
 			Restaurant.restaurants.clear
 			if input == "1"
-				list = []
+				
 				Restaurant.new(Scraper.scrape_hash("https://sf.eater.com/maps/best-new-restaurants-san-francisco-oakland-berkeley-heatmap"))
 				puts "Here are the current restaurants on Eater SF's Heatmap: "
 				list = Restaurant.restaurants
@@ -29,8 +29,9 @@ class EaterSFHeatmap::CLI1
 					puts "#{i + 1}.   #{rest[:name]}"
 				end
 				input = 'exit'
+				blurb(list)
 			elsif input == "2"
-				list = []
+			
 				Restaurant.new(Scraper.scrape_hash("https://sf.eater.com/maps/best-restaurants-san-francisco-38"))
 				puts "Here are the current restaurants on Eater SF's 38 Essntials List: "
 				list = Restaurant.restaurants
@@ -38,16 +39,18 @@ class EaterSFHeatmap::CLI1
 					puts "#{i + 1}.   #{rest[:name]}"
 				end
 				input = 'exit'
-			
+				blurb(list)
+			elsif input == 'exit'
+					break
 			else
 				puts "Please enter 1 or 2."
 			end
 		end
-		list
+		
 	end
 
 	def blurb(list)
-		#not updating blurbs....
+		#NOT EXITING PROPERLY
 		
 		names = []
 		address =[]
@@ -78,7 +81,7 @@ class EaterSFHeatmap::CLI1
 			elsif input == "list"
 				list_restaurants
 			elsif input == "exit"
-				
+				break
 			else
 				puts "Please enter a valid selection."
 			end
