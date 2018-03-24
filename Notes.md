@@ -21,7 +21,8 @@ b. Ask if you want restaurant info?
  CLI
  ->	Scraper
  	-> Restaurant
- 
+ 		-> Scraper
+
 
 #2
 Using bundler:

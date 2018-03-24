@@ -1,9 +1,11 @@
 class EaterSFHeatmap::CLI
 
+	attr_accessor :name, :address, :phone, :blurb
+
 	def welcome
 		puts "Welcome to the Eater SF Heatmap Gem!"
-		Restaurant.scrape
-		binding.pry
+		#initializes Restaurant objects
+		Restaurant.new(Scraper.scrape_hash)
 		list_restaurants
 		blurb
 		goodbye
@@ -11,15 +13,18 @@ class EaterSFHeatmap::CLI
 
 	def list_restaurants
 		puts "Here are the current restaurants on Eater SF's Heatmap: "
-		list = Restaurant.scrape_names
+		list = Restaurant.restaurants
 		list.each.with_index do |rest, i|
-			puts "#{i + 1}.   #{rest}"
+			puts "#{i + 1}.   #{rest[:name]}"
 		end
 	end
 
 	def blurb
 		#puts "Enter the number of the restaurant you'd like to learn more about OR type 'list' to relist the restaurants OR type exit: "
-		info = Restaurant.scrape_blurb
+		info = []
+		Restaurant.restaurants.each do |bl|
+			info << bl[:blurb]
+		end
 		#need to implement logic to make sure a valid input is used.
 		input = nil
 		while input != "exit"

@@ -4,8 +4,8 @@ require 'nokogiri'
 
 class Scraper
 
-	doc = Nokogiri::HTML(open("https://sf.eater.com/maps/best-new-restaurants-san-francisco-oakland-berkeley-heatmap"))
-	list = doc.css(".c-mapstack__cards") #collection of .c-mapstack__card
+	@doc = Nokogiri::HTML(open("https://sf.eater.com/maps/best-new-restaurants-san-francisco-oakland-berkeley-heatmap"))
+	@list = @doc.css(".c-mapstack__cards") #collection of .c-mapstack__card
 
 	def self.scrape_addresses
 
@@ -14,7 +14,7 @@ class Scraper
 	    adds = []
 	    hold_add = []
 
-		address = list.css(".c-mapstack__card")
+		address = @list.css(".c-mapstack__card")
 
 		address.each do |card|
 			if (!card.css(".c-mapstack__sponsor").empty?) || (!card.css(".c-entry-sponsorship").empty?)
@@ -60,7 +60,7 @@ class Scraper
 	    phones = []
 	    hold_ph = []
 
-		address = list.css(".c-mapstack__card")
+		address = @list.css(".c-mapstack__card")
 
 		address.each do |card|
 			if (!card.css(".c-mapstack__sponsor").empty?) || (!card.css(".c-entry-sponsorship").empty?)
@@ -104,7 +104,7 @@ class Scraper
 	def self.scrape_names
 
 	    hold_name = []
-		cards = list.css("h2")
+		cards = @list.css("h2")
 		cards.each do |sect|
 		  if sect.css("h2 .c-mapstack__card-index").text != nil
 		    hold_name << sect
@@ -125,7 +125,7 @@ class Scraper
 
 	    hold_blurb = []
 	    blurbs = []
-	    blurb = list.css(".c-mapstack__card")
+	    blurb = @list.css(".c-mapstack__card")
 
 		blurb.each do |card|
 			#empty array, if not present

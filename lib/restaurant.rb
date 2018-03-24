@@ -10,14 +10,15 @@ class Restaurant
 
 
 	def initialize(restaurant_hash)
-		restaurant_hash.each do |key, value|
-      		self.send("#{key}=", value)
+		restaurant_hash.each do |rest_obj|
+
+    		@@restaurants << rest_obj
     	end
-    	@@restaurants << self
+    	@@restaurants
 	end
 
 	def self.restaurants
 		@@restaurants
 	end
-	
+
 end
