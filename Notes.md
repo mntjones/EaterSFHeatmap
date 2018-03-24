@@ -18,6 +18,10 @@ b. Ask if you want restaurant info?
     -> Get blurb written about restaurant
 
 
+ CLI
+ ->	Scraper
+ 	-> Restaurant
+ 
 
 #2
 Using bundler:
@@ -33,7 +37,7 @@ What is a restaurant?
 - has an address
 - has a phone number
 - has a description
-- has various optional links: website, opentable, foursquare, google maps
+
 
 #Scraping
 

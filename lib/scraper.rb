@@ -145,5 +145,23 @@ class Scraper
 		bl
 	end
 
+	def self.scrape_hash
+		names = self.scrape_names
+		addresses = self.scrape_addresses
+		phones = self.scrape_phones
+		blurbs = self.scrape_blurb
+		rest_obj_hash = []
+
+
+		names.each_with_index do |name, i|
+     		hold = {:name => names[i], :address => addresses[i], :phones => phones[i], :blurb => blurbs[i]}
+     		rest_obj_hash << hold
+   		end
+   		
+   		rest_obj_hash
+
+	end
+
+
 end
 
