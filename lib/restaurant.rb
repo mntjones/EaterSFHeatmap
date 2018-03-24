@@ -21,4 +21,8 @@ class Restaurant
 		@@restaurants
 	end
 
+	def self.clear
+		@@restaurants = []
+	end
+
 end

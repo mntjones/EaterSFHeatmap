@@ -4,17 +4,19 @@ require 'nokogiri'
 
 class Scraper
 
-	@doc = Nokogiri::HTML(open("https://sf.eater.com/maps/best-new-restaurants-san-francisco-oakland-berkeley-heatmap"))
-	@list = @doc.css(".c-mapstack__cards") #collection of .c-mapstack__card
+	#@doc = Nokogiri::HTML(open("https://sf.eater.com/maps/best-new-restaurants-san-francisco-oakland-berkeley-heatmap"))
+	#@list = @doc.css(".c-mapstack__cards") #collection of .c-mapstack__card
 
-	def self.scrape_addresses
+	def self.scrape_addresses(link)
 
 	    # This section is prime for refactoring -ugh
+	    doc = Nokogiri::HTML(open(link))
+	    list = doc.css(".c-mapstack__cards")
 
 	    adds = []
 	    hold_add = []
 
-		address = @list.css(".c-mapstack__card")
+		address = list.css(".c-mapstack__card")
 
 		address.each do |card|
 			if (!card.css(".c-mapstack__sponsor").empty?) || (!card.css(".c-entry-sponsorship").empty?)
@@ -55,12 +57,13 @@ class Scraper
 		adds
 	end
 
-	def self.scrape_phones
-
+	def self.scrape_phones(link)
+		doc = Nokogiri::HTML(open(link))
+	    list = doc.css(".c-mapstack__cards")
 	    phones = []
 	    hold_ph = []
 
-		address = @list.css(".c-mapstack__card")
+		address = list.css(".c-mapstack__card")
 
 		address.each do |card|
 			if (!card.css(".c-mapstack__sponsor").empty?) || (!card.css(".c-entry-sponsorship").empty?)
@@ -101,10 +104,11 @@ class Scraper
 		phones
 	end
 		
-	def self.scrape_names
-
+	def self.scrape_names(link)
+		doc = Nokogiri::HTML(open(link))
+	    list = doc.css(".c-mapstack__cards")
 	    hold_name = []
-		cards = @list.css("h2")
+		cards = list.css("h2")
 		cards.each do |sect|
 		  if sect.css("h2 .c-mapstack__card-index").text != nil
 		    hold_name << sect
@@ -121,15 +125,16 @@ class Scraper
 		names  
 	end
 
-	def self.scrape_blurb
-
+	def self.scrape_blurb(link)
+		doc = Nokogiri::HTML(open(link))
+	    list = doc.css(".c-mapstack__cards")
 	    hold_blurb = []
 	    blurbs = []
-	    blurb = @list.css(".c-mapstack__card")
+	    blurb = list.css(".c-mapstack__card")
 
 		blurb.each do |card|
 			#empty array, if not present
-			if (!card.css(".c-mapstack__sponsor").empty?) || (!card.css(".c-entry-sponsorship").empty?)
+			if (!card.css(".c-mapstack__sponsor").empty?) || (!card.css(".c-entry-sponsorship").empty?) || (!card.css(".c-entry-summary").empty?)
 				blurbs << "SPONSOR"
 			else
 				blurbs << card.css(".c-entry-content").children.text
@@ -145,11 +150,11 @@ class Scraper
 		bl
 	end
 
-	def self.scrape_hash
-		names = self.scrape_names
-		addresses = self.scrape_addresses
-		phones = self.scrape_phones
-		blurbs = self.scrape_blurb
+	def self.scrape_hash(link)
+		names = self.scrape_names(link)
+		addresses = self.scrape_addresses(link)
+		phones = self.scrape_phones(link)
+		blurbs = self.scrape_blurb(link)
 		rest_obj_hash = []
 
 
