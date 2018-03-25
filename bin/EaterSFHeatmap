@@ -3,4 +3,4 @@
 require "bundler/setup"
 require "EaterSFHeatmap"
 
-EaterSFHeatmap::CLI1.new.welcome
+EaterSFHeatmap::CLI.new.welcome

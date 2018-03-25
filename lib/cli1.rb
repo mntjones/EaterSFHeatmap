@@ -2,13 +2,11 @@ class EaterSFHeatmap::CLI1
 
 	attr_accessor :name, :address, :phone, :blurb
 
-
 	def welcome
 		puts "Welcome to the Eater SF Gem!"
 		#initializes Restaurant objects
 
 		list_restaurants
-		
 		goodbye
 	end
 
@@ -20,18 +18,18 @@ class EaterSFHeatmap::CLI1
 			puts"Do you want to see: 1. the Heatmap List or 2. the 38 Essentials List?"
 			input = gets.strip.downcase
 			Restaurant.restaurants.clear
+
 			if input == "1"
-				
 				Restaurant.new(Scraper.scrape_hash("https://sf.eater.com/maps/best-new-restaurants-san-francisco-oakland-berkeley-heatmap"))
 				puts "Here are the current restaurants on Eater SF's Heatmap: "
 				list = Restaurant.restaurants
 				list.each.with_index do |rest, i|
 					puts "#{i + 1}.   #{rest[:name]}"
 				end
-				input = 'exit'
+				input = "exit"
 				blurb(list)
+				
 			elsif input == "2"
-			
 				Restaurant.new(Scraper.scrape_hash("https://sf.eater.com/maps/best-restaurants-san-francisco-38"))
 				puts "Here are the current restaurants on Eater SF's 38 Essntials List: "
 				list = Restaurant.restaurants
@@ -40,8 +38,9 @@ class EaterSFHeatmap::CLI1
 				end
 				input = 'exit'
 				blurb(list)
+
 			elsif input == 'exit'
-					break
+			
 			else
 				puts "Please enter 1 or 2."
 			end
@@ -49,9 +48,7 @@ class EaterSFHeatmap::CLI1
 		
 	end
 
-	def blurb(list)
-		#NOT EXITING PROPERLY
-		
+	def blurb(list)		
 		names = []
 		address =[]
 		phones =[]
@@ -64,8 +61,8 @@ class EaterSFHeatmap::CLI1
 			info << rest[:blurb]
 		end
 
-		#need to implement logic to make sure a valid input is used.
 		input = nil
+
 		while input != "exit"
 
 			puts "Enter the number of the restaurant you'd like to learn more about OR type 'list' to relist the restaurants OR type exit: "
@@ -79,11 +76,13 @@ class EaterSFHeatmap::CLI1
 				puts "#{info[(input.to_i) -1].strip}"
 				puts " "
 			elsif input == "list"
+				input = 'exit'
 				list_restaurants
 			elsif input == "exit"
-				break
+	
 			else
 				puts "Please enter a valid selection."
+				input =nil
 			end
 		end
 	end

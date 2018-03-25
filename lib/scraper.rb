@@ -4,12 +4,8 @@ require 'nokogiri'
 
 class Scraper
 
-	#@doc = Nokogiri::HTML(open("https://sf.eater.com/maps/best-new-restaurants-san-francisco-oakland-berkeley-heatmap"))
-	#@list = @doc.css(".c-mapstack__cards") #collection of .c-mapstack__card
-
 	def self.scrape_addresses(link)
 
-	    # This section is prime for refactoring -ugh
 	    doc = Nokogiri::HTML(open(link))
 	    list = doc.css(".c-mapstack__cards")
 
@@ -164,9 +160,6 @@ class Scraper
    		end
    		
    		rest_obj_hash
-
 	end
-
-
 end
 
