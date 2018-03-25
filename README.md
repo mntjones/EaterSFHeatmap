@@ -1,13 +1,22 @@
 # EaterSFHeatmap
 
 
-This Ruby Gem will scrape Eater SF's Heatmap page and display the current restaurants on the heat map and their address.
+This Ruby Gem will scrape Eater SF's Heatmap page and Eater SF's Essential Restaurants List. The CLI will ask the user which list they wouldlike to view and display the current restaurants listed.
 
-Ex. 1. My Eatery - 1234 Main St., San Francisco, CA 94101
+Ex. 1. My Eatery 
+	2. Yummy Food
+	3. Bar and Bites
 
-The user will then be prompted to choose a number of the restaurant they want more information about.
 
-Ex. "My Eatery produces Spanish-inspired cuisine, locally sourced, with a menu that changes weekly."
+The user will then be prompted to choose a number of the restaurant they want more information about, or the user can choose to view the list choices again, or exit.
+
+More restaurant info:
+My Eatery
+123 Mission St., San Francisco, CA 94102
+(415) 555-5555
+
+My Eatery produces Spanish-inspired cuisine, locally sourced, with a menu that changes weekly.
+
 
 ## Installation
 
@@ -27,13 +36,16 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+After following the installation steps above, run the Gem file 
 
-## Development
+```
+./bin/EaterSFHeatmap
+```
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+The CLI will greet the user and ask the user to enter "1" for the Eater SF Heatmap, or "2" for the Eater SF Essential 38 list. Anything other than a "1" or "2" will prompt the user for a valid selection.
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+Once the user chooses which list to view, the applicable list will be displayed and the user will be asked to enter the number of the restaurant they would like more information about. The user also has the option to type "list" to go back to the previous paragraph steps, or to type "exit" to leave the application.
+
 
 ## Contributing
 
