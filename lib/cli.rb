@@ -31,7 +31,7 @@ class EaterSFHeatmap::CLI
 				
 			elsif input == "2"
 				Restaurant.new(Scraper.scrape_hash("https://sf.eater.com/maps/best-restaurants-san-francisco-38"))
-				puts "Here are the current restaurants on Eater SF's 38 Essntials List: "
+				puts "Here are the current restaurants on Eater SF's 38 Essentials List: "
 				list = Restaurant.restaurants
 				list.each.with_index do |rest, i|
 					puts "#{i + 1}.   #{rest[:name]}"
