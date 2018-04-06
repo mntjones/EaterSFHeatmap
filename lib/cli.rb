@@ -1,11 +1,7 @@
 class EaterSFHeatmap::CLI
 
-	attr_accessor :name, :address, :phone, :blurb
-
 	def welcome
 		puts "Welcome to the Eater SF Gem!"
-		#initializes Restaurant objects
-
 		list_restaurants
 		goodbye
 	end
@@ -17,12 +13,12 @@ class EaterSFHeatmap::CLI
 		while input != 'exit'
 			puts"Do you want to see: 1. the Heatmap List or 2. the 38 Essentials List?"
 			input = gets.strip.downcase
-			Restaurant.restaurants.clear
+			Restaurant.restaurants.clear #makes sure Restaurant class array is empty
 
 			if input == "1"
 				Restaurant.new(Scraper.scrape_hash("https://sf.eater.com/maps/best-new-restaurants-san-francisco-oakland-berkeley-heatmap"))
 				puts "Here are the current restaurants on Eater SF's Heatmap: "
-				list = Restaurant.restaurants
+				list = Restaurant.restaurants #gets Restaurant array
 				list.each.with_index do |rest, i|
 					puts "#{i + 1}.   #{rest[:name]}"
 				end
@@ -44,22 +40,10 @@ class EaterSFHeatmap::CLI
 			else
 				puts "Please enter 1 or 2."
 			end
-		end
-		
+		end	
 	end
 
 	def blurb(list)		
-		names = []
-		address =[]
-		phones =[]
-		info = []
-
-		list.each do |rest|
-			names << rest[:name]
-			address << rest[:address]
-			phones << rest[:phones]
-			info << rest[:blurb]
-		end
 
 		input = nil
 
@@ -68,12 +52,12 @@ class EaterSFHeatmap::CLI
 			puts "Enter the number of the restaurant you'd like to learn more about OR type 'list' to relist the restaurants OR type exit: "
 			input = gets.strip.downcase
 			
-			if input.to_i > 0 && input.to_i <= info.length
+			if input.to_i > 0 && input.to_i <= list.length
 				puts " "
-				puts "#{names[(input.to_i) -1].strip}"
-				puts "#{address[(input.to_i) - 1].strip}"
-				puts "#{phones[(input.to_i) -1].strip}"
-				puts "#{info[(input.to_i) -1].strip}"
+				puts "#{list[(input.to_i) - 1][:name].strip}"
+				puts "#{list[(input.to_i) - 1][:address].strip}"
+				puts "#{list[(input.to_i) -1][:phone].strip}"
+				puts "#{list[(input.to_i) -1][:blurb].strip}"
 				puts " "
 			elsif input == "list"
 				input = 'exit'

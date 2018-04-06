@@ -155,7 +155,7 @@ class Scraper
 
 
 		names.each_with_index do |name, i|
-     		hold = {:name => names[i], :address => addresses[i], :phones => phones[i], :blurb => blurbs[i]}
+     		hold = {:name => names[i], :address => addresses[i], :phone => phones[i], :blurb => blurbs[i]}
      		rest_obj_hash << hold
    		end
    		
