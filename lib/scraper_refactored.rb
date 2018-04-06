@@ -7,7 +7,7 @@ class Scraper
 	def self.scrape_addresses(link)
 		doc = Nokogiri::HTML(open(link))
 		list = doc.css(".c-mapstack__card")
-
+		
 	    adds = []
 	    addresses = []
 
