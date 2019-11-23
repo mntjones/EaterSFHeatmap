@@ -8,7 +8,6 @@ class Restaurant
 
 	@@restaurants = []
 
-
 	def initialize(restaurant_hash)
 		restaurant_hash.each do |rest_obj|
 
